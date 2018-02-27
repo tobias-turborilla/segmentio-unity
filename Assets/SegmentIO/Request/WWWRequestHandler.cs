@@ -23,7 +23,7 @@ namespace Segmentio.Request
 
 		public void MakeRequest(Batch batch) {
 			try {
-				Uri uri = new Uri(client.Options.Host + "/v1/import");
+				Uri uri = new Uri(client.Options.Host + "/v1/batch");	// correct endpoint
 
 				string json = Json.Serialize(batch);
 
@@ -35,7 +35,7 @@ namespace Segmentio.Request
 				var data = encoding.GetBytes(json);
 				var postHeaders = new Hashtable();
 				postHeaders.Add("Content-Type", "application/json");
-				postHeaders.Add("Content-Length", data.Length);
+				// postHeaders.Add("Content-Length", data.Length); // this is set by WWW class
 
 				www = new WWW(uri.AbsoluteUri, data, postHeaders);
 				currentBatch = batch;
